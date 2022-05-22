@@ -13,13 +13,14 @@
             {{ session()->get('Exist') }}
         </div>
     @endif 
-    <form action="/code/{{$id}}" method="POST">
+    <button class="btn btn-primary my-3" onclick="window.location='/code'"> Back </button>
+    <form action="/labor/{{$data->id}}" method="POST">
         <div class="form-group">
           <label class="mt-2 font-weight-bold">Bus Number</label>
-          <input type="text" name="busNum" class="form-control" placeholder="Bus Number">
+          <input type="text" name="busNum" class="form-control" placeholder={{$data->busNum}} value={{$data->busNum}}>
 
           <label class="mt-2 font-weight-bold">Bus Letters</label>
-          <input type="text" name="busAlph" class="form-control" placeholder="Bus Letters">
+          <input type="text" name="busAlph" class="form-control" placeholder={{$data->busAlph}} value={{$data->busAlph}}>
 
         </div>
             

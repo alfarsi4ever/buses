@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BusesController;
+use App\Http\Controllers\LaborController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,5 +19,14 @@ Route::get('/', function () {
 }); 
 
  Route::resource('code',BusesController::class);
+ Route::resource('labor',LaborController::class);
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

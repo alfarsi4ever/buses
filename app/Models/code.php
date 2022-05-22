@@ -10,4 +10,8 @@ class code extends Model
     use HasFactory;
 
     protected $guarded=[];
+
+    public function Labor(){
+        return $this->hasMany('Labor'::class);
+    }
 }

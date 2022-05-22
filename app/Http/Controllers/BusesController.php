@@ -66,11 +66,14 @@ class BusesController extends Controller
      */
     public function show($id)
     {
-        $codes=code::where('barCodeUrl',$id)->get();
-        return View('code.show',[
-            'qrcode'=>$id,
-            'codes'=>$codes
-        ]);
+        // $codes=code::where('barCodeUrl',$id)->get();
+        // return View('code.show',[
+        //     'qrcode'=>$id,
+        //     'codes'=>$codes
+        // ]);
+
+        $data=code::find($id);
+        return View('code.show',compact('data'));
     }
 
     /**
@@ -81,10 +84,8 @@ class BusesController extends Controller
      */
     public function edit($id)
     {
-
-        return View('code.edit',[
-            'id'=>$id
-        ]);
+        $data=code::find($id);
+        return View('code.edit',compact('data'));
     }
 
     /**
@@ -101,9 +102,7 @@ class BusesController extends Controller
             'busAlph'=>'required'
         ]);
         $customer = code::where('busNum', $request->busNum)->where('busAlph', $request->busAlph)->first();
-        if ($customer){
-            return redirect()->back()->with('Exist', 'Bus Already Exist!');
-        }
+        
     //    array_push($data, 'barCodeImg'=> 'Google.com');
         $randomString = Str::random(30);
        $data['barCodeUrl'] = $randomString;
@@ -115,7 +114,7 @@ class BusesController extends Controller
        $code->barCodeUrl = $data['barCodeUrl'];
        $code->save();
 
-        return redirect('code');
+        return redirect('code')->with('success', 'Bus udated successfully!');
     }
 
     /**

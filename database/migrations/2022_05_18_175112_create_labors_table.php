@@ -15,7 +15,7 @@ class CreateLaborsTable extends Migration
     {
         Schema::create('labors', function (Blueprint $table) {
             $table->id();
-            $table->string("Bus_id")->nullable();
+            $table->unsignedInteger("Bus_id");
             $table->string("name");
             $table->string("phone");
             $table->timestamps();

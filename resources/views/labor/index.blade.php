@@ -17,21 +17,22 @@
 
     <table class="table table-striped table-dark text-center">
         <tr>
-          <th>Plate Number</th>
-          <th>Plate letters</th>
-          <th>QRcode</th>
+          <th>Bus Plate</th>
+          <th>Name</th>
+          <th>Phone</th>
           <th></th>
         </tr>
-        @foreach ($codes as $code)
+        @foreach ($labors as $labor)
             <tr>
-                <td>{{$code->busNum}}</td>
-                <td>{{$code->busAlph}}</td>
-                <td><a href="{{'code/'.$code->id}}">Get QR</a></td>
-                <td><a href="{{'code/'.$code->id.'/edit'}}" class="btn btn-info" role="button">Edit</a></td>
+                <td>{{$labor->code->busNum}} · {{$labor->code->busAlph}}</td>
+                {{-- <td>{{$labor->code}}</td> --}}
+                <td>{{$labor->name}}</td>
+                <td>{{$labor->phone}}</td>
+                <td><a href="{{'labor/'.$labor->id.'/edit'}}" class="btn btn-info" role="button">Edit</a></td>
             </tr>
         @endforeach
     </table>
-    <a href="code/create" class="btn btn-success btn-lg" role="button">Create New</a>
+    <a href="labor/create" class="btn btn-success btn-lg" role="button">Create New</a>
 
 
 @endsection

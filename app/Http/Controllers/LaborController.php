@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Labor;
+use App\Models\code;
 class LaborController extends Controller
 {
     /**
@@ -13,8 +14,10 @@ class LaborController extends Controller
      */
     public function index()
     {
-        return "ahmed";
+        $labors = Labor::all();
+        return View('labor.index',compact('labors'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -22,8 +25,8 @@ class LaborController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   $buses=code::all();
+        return View("labor.create",compact('buses'));
     }
 
     /**
@@ -36,14 +39,17 @@ class LaborController extends Controller
     {
         $data=request()->validate([
             'phone'=>'required',
-            'name'=>'required'
+            'name'=>'required',
+            'Bus_id'=>'required'
             ]);
 
         $customer = Labor::where('phone', $request->phone)->where('name', $request->name)->first();
             if ($customer){
-                return 'Labor Already Exists!';
+                return redirect()->back()->with('Exist', 'Bus Already Exists!');
             }
             Labor::create($data);
+
+            return redirect('labor')->with('success','Labor data Created Successfully');
     }
 
     /**
@@ -65,7 +71,10 @@ class LaborController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data=Labor::all();
+        // dd($data);
+        $_here=Labor::find($id);
+        return View('labor.edit',compact('data','_here'));
     }
 
     /**
@@ -77,7 +86,25 @@ class LaborController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data=request()->validate([
+            'phone'=>'required',
+            'name'=>'required',
+            'Bus_id'=>'required'
+            ]);
+            
+            //Update Incomplete
+            
+        // $customer = Labor::where('phone', $request->phone)->where('name', $request->name)->first();
+        //     if ($customer ){
+        //         return redirect()->back()->with('Exist', 'Labor Already Exists!');
+        //     }
+            $labor = Labor::find($id);
+            $labor->phone =$request->input('phone');
+            $labor->name =$request->input('name');
+            $labor->Bus_id =$data['Bus_id'];
+            $labor->save();
+
+            return redirect('labor')->with('success','Labor data Updated Successfully');
     }
 
     /**
