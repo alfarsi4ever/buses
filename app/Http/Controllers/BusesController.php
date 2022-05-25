@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\code;
+use App\Models\Labor;
 use Illuminate\Support\Str;
 class BusesController extends Controller
 {
@@ -73,7 +74,11 @@ class BusesController extends Controller
         // ]);
 
         $data=code::find($id);
-        return View('code.show',compact('data'));
+        
+        // $bus_labor=Labor::where('id','$data->id')->get();
+        $bus_labor=Labor::where('Bus_id','=',$id)->get();
+            
+        return View('code.show',compact('data','bus_labor'));
     }
 
     /**

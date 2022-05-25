@@ -29,6 +29,7 @@
                 <td><a href="{{'code/'.$code->id}}">Get QR</a></td>
                 <td><a href="{{'code/'.$code->id.'/edit'}}" class="btn btn-info" role="button">Edit</a></td>
             </tr>
+            
         @endforeach
     </table>
     <a href="code/create" class="btn btn-success btn-lg" role="button">Create New</a>
